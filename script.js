@@ -31,6 +31,14 @@ let userPoints = JSON.parse(localStorage.getItem("points")) || {};
 
 const slots = ["9:00-10:00", "10:00-11:00", "11:00-12:00", "3:00-4:00", "4:00-5:00"];
 
+// Game-wise slot limits
+const limits = {
+  "Badminton": 4,
+  "Table Tennis": 2,
+  "Basketball": 10,
+  "Volleyball": 12
+};
+
 loginBtn.onclick = () => {
   const email = emailInput.value.trim();
   if (!email.endsWith("@gitam.in")) return alert("Enter valid GITAM email!");
@@ -64,9 +72,11 @@ games.forEach(btn => {
     const date = new Date().toISOString().split("T")[0];
     slotsTitle.innerText = `Available Slots for ${game} on ${date}`;
     slotsDiv.innerHTML = "";
+
     slots.forEach(slot => {
+      const limit = limits[game] || 10;
       const count = bookings.filter(b => b.game === game && b.date === date && b.time === slot).length;
-      const disabled = count >= 10;
+      const disabled = count >= limit;
       const button = document.createElement("button");
       button.innerText = disabled ? `${slot} (Full)` : slot;
       button.disabled = disabled;
@@ -82,11 +92,20 @@ backBtn.onclick = () => {
 };
 
 function bookSlot(game, date, time) {
+  // Restrict user to only one booking per day
+  const alreadyBooked = bookings.some(
+    b => b.email === currentUser && b.date === date
+  );
+  if (alreadyBooked) {
+    alert("You have already booked a slot for today! Only one booking per day is allowed.");
+    return;
+  }
+
   bookings.push({ email: currentUser, game, date, time });
   localStorage.setItem("bookings", JSON.stringify(bookings));
   userPoints[currentUser] = (userPoints[currentUser] || 0) + 3;
   localStorage.setItem("points", JSON.stringify(userPoints));
-  alert(`Booked ${game} - ${time} on ${date}`);
+  alert(`✅ Booked ${game} - ${time} on ${date}`);
   renderBookings();
   slotsCard.classList.add("hidden");
 }
