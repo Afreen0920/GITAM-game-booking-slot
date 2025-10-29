@@ -1,0 +1,91 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #a18cd1);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 30px;
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #d63384;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #b02a6b;
+}
+
+.games button {
+  margin: 5px;
+  padding: 8px 12px;
+}
+
+#slots button {
+  margin: 5px;
+  padding: 8px 14px;
+}
+
+.admin-link {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.admin-link a {
+  color: #d63384;
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 14px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
